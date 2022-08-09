@@ -1,7 +1,7 @@
 # spring_rest_api
 This is a sample project to practice & implement REST APIs using spring framework
 
-### Implemeted Following REST APIs
+### Implemeted Following REST APIs for Courses
 
 1) **GET**    -  `http://localhost:8080/courses`     (_Get All Courses From Database_)
 2) **GET**   -  `http://localhost:8080/courses/1`   (_Get Course By Course ID_)
