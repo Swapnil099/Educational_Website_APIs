@@ -18,5 +18,5 @@
 2) **POST**    -  `http://localhost:8080/api/user/save`    <sub> (_Save New User to DB_)   - Access - ROLE_ADMIN only <sub/> 
 3) **POST**   -  `http://localhost:8080/api/role/save`     <sub> (_Create New Role_)       - Access -  ROLE_ADMIN only <sub/> 
 4) **POST**   -  `http://localhost:8080/api/role/addtouser` <sub> (_Specify User Roles_)    - Access -  ROLE_ADMIN only <sub/> 
-6) **DELETE** -  `http://localhost:8080/api/user/delete?username` <sub> (_Delete User From Database By Username_) - Access -OLE_ADMIN only <sub/> 
+6) **DELETE** -  `http://localhost:8080/api/user/delete?username` <sub> (_Delete User From Database By Username_) - ROLE_ADMIN only <sub/> 
 7) **GET**    -  `http://localhost:8080/api/users`  <sub> (_Get All Users With Their Roles_) - Access - ROLE_ADMIN only <sub/> 
