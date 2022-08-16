@@ -1,5 +1,9 @@
 # spring_rest_api
-This is a sample project to practice & implement REST APIs using spring framework and Spring Security
+### This is a sample project to practice & implement different Spring Technologies. 
+![This is an image](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![This is an image](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white)
+![This is an image](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![This is an image](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
 
 ### Implemeted Following REST APIs for Courses
 
