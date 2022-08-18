@@ -24,12 +24,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.demo.dao.LibUserDao;
-import com.example.demo.dao.RoleDao;
-import com.example.demo.entities.LibUser;
+import com.example.demo.entitiy.LibUser;
 import com.example.demo.filter.CustomAuthenticationFilter;
 import com.example.demo.filter.CustomAuthorizationFiler;
-import com.example.demo.services.LibUserServiceImpl;
+import com.example.demo.repository.LibUserDao;
+import com.example.demo.repository.RoleDao;
+import com.example.demo.service.LibUserServiceImpl;
 
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -77,10 +77,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/user/save").hasAnyAuthority("ROLE_ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/users").hasAnyAuthority("ROLE_ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/user/**").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/user/**").hasAnyAuthority("ROLE_ADMIN");
 		
 		http.authorizeRequests().anyRequest().authenticated();
-//		http.authorizeRequests().anyRequest().permitAll();
+
 		http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
 		http.addFilterBefore(new CustomAuthorizationFiler(), UsernamePasswordAuthenticationFilter.class);
 	}

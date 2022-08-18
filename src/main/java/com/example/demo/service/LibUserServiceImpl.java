@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,10 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.dao.LibUserDao;
-import com.example.demo.dao.RoleDao;
-import com.example.demo.entities.LibUser;
-import com.example.demo.entities.Role;
+import com.example.demo.entitiy.LibUser;
+import com.example.demo.entitiy.Role;
+import com.example.demo.repository.LibUserDao;
+import com.example.demo.repository.RoleDao;
 
 import lombok.RequiredArgsConstructor;
 
@@ -79,9 +79,14 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 	}
 
 	@Override
-	public void deleteUserByUsername(String username) {
+	public void deleteUserByUsername(String username) throws UsernameNotFoundException {
 		LibUser tempLibUser = libUserDao.findByUsername(username);
-		if(tempLibUser != null) libUserDao.delete(tempLibUser);
+		try {
+			 libUserDao.delete(tempLibUser);
+		}
+		catch(UsernameNotFoundException e) {
+			e.printStackTrace();
+		}
 		return;
 	}
 

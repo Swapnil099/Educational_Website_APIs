@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.demo.entities.LibUser;
-import com.example.demo.entities.Role;
-import com.example.demo.services.LibUserService;
+import com.example.demo.entitiy.LibUser;
+import com.example.demo.entitiy.Role;
+import com.example.demo.service.LibUserService;
 
 @RestController
 @RequestMapping("/api")
@@ -27,9 +28,14 @@ public class libUserController {
 		this.libUserService = libUserService;
 	}
 	
-	@GetMapping("/users")
-	public ResponseEntity<List<LibUser>> getusers(){
-		return ResponseEntity.ok().body(libUserService.getUsers());
+	@GetMapping("/user")
+	public ResponseEntity<?> getusers(){
+		try {
+			return ResponseEntity.ok().body(libUserService.getUsers());
+		}
+		catch(Exception e) {
+			return new ResponseEntity<String>("Cannot get users - " + e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PostMapping("/user/save")
@@ -52,8 +58,13 @@ public class libUserController {
 	
 	@DeleteMapping("/user/delete")
 	public ResponseEntity<?> deleteUserByUsername(@RequestParam String username){
-		libUserService.deleteUserByUsername(username);
-		return ResponseEntity.ok().body(username + " is deleted");
+		try {
+			libUserService.deleteUserByUsername(username);
+			return ResponseEntity.ok().body(username + " is deleted");
+		}
+		catch(Exception e) {
+			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deletion Failed");
+		}
 	}
 	
 }

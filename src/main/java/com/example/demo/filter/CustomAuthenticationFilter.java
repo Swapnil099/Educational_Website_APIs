@@ -23,7 +23,7 @@ import org.springframework.http.MediaType;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.demo.entities.LibUser;
+import com.example.demo.entitiy.LibUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -52,7 +52,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 		Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
 		String accessToken = (String) JWT.create()
 				.withSubject(tempLibUser.getUsername())
-				.withExpiresAt(new Date(System.currentTimeMillis()+10*60*1000))
+				.withExpiresAt(new Date(System.currentTimeMillis()+30*60*1000))
 				.withIssuer(request.getRequestURL().toString())
 				.withClaim("roles",tempLibUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				.sign(algorithm);
@@ -64,9 +64,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 				.sign(algorithm);
 		
 		System.out.println(refreshToken);
-		
-//		response.setHeader("access_token", accessToken);
-//		response.setHeader("access_token", refreshToken);
+	
 		
 		Map<String,String> tokens = new HashMap<>();
 		tokens.put("access_token", accessToken);

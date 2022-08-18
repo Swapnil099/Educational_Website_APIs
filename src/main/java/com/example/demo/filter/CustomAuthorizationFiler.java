@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,7 +31,7 @@ public class CustomAuthorizationFiler extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+			throws ServletException, IOException,AccessDeniedException {
 
 		if (request.getServletPath().equals("/login")) {
 			filterChain.doFilter(request, response);
@@ -72,8 +73,8 @@ public class CustomAuthorizationFiler extends OncePerRequestFilter {
 
 				response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 				new ObjectMapper().writeValue(response.getOutputStream(), error);
-				
-				filterChain.doFilter(request, response);
+
+//				filterChain.doFilter(request, response);
 			}
 		}
 	}

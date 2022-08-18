@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entities.Course;
-import com.example.demo.services.CourseService;
+import com.example.demo.entitiy.Course;
+import com.example.demo.service.CourseService;
 
 
 @RestController
@@ -35,32 +35,42 @@ public class MyController {
 	}
 	
 	@GetMapping("/courses/{courseId}")
-	public Course getCourseById(@PathVariable String courseId) {
-		return courseService.getCourseByID(Long.parseLong(courseId));
+	public ResponseEntity<String> getCourseById(@PathVariable String courseId) {
+		try{
+			return courseService.getCourseByID(Long.parseLong(courseId));
+		}
+		catch(Exception e) {
+			return new ResponseEntity<String>("Error Occured while Getting Course By ID - " + e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PostMapping("/courses")
-	public String addCourse(@RequestBody Course course) {
-		return courseService.addCourse(course);
+	public ResponseEntity<String> addCourse(@RequestBody Course course) {
+		try{
+			return courseService.addCourse(course);
+		}
+		catch(Exception e) {
+			return new ResponseEntity<String>("Error Occured while Adding New Course - " + e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PutMapping("/course")
 	public ResponseEntity<String> updateCourseById(@RequestBody Course course) {
-		try {
-			return courseService.updateCourse(course);
-		}
-		catch(Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+			try{
+				return courseService.updateCourse(course);
+			}
+			catch(Exception e) {
+				return new ResponseEntity<String>("Error Occured While Updating Course - " + e.getMessage(),HttpStatus.BAD_REQUEST);
+			}
 	}
 	
 	@DeleteMapping("/course/{courseId}")
-	public ResponseEntity<String> deleteCourseByById(@PathVariable String courseId) {
-		try {
+	public ResponseEntity<String> deleteCourseByById(@PathVariable String courseId) {	
+		try{
 			return courseService.deleteCourseById(courseId);
 		}
 		catch(Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>("Error Occured - " + e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
 	}
 	
