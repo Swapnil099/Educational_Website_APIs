@@ -35,11 +35,20 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @SuppressWarnings("deprecation")
-@Configuration @EnableWebSecurity @RequiredArgsConstructor @NoArgsConstructor
+@Configuration @EnableWebSecurity 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private  LibUserDao libUserDao;
+	
+	public SecurityConfig() {
+	}
+
+	public SecurityConfig(LibUserDao libUserDao) {
+		super();
+		this.libUserDao = libUserDao;
+	}
+	
 
 	private final UserDetailsService userDetailsService = new UserDetailsService() {
 		
@@ -71,13 +80,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
-		http.authorizeRequests().antMatchers(HttpMethod.POST,"/courses").hasAnyAuthority("ROLE_ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT,"/course").hasAnyAuthority("ROLE_ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/course").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/course").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT,"/api/course").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/course").hasAnyAuthority("ROLE_ADMIN");
 		
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/user/save").hasAnyAuthority("ROLE_ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/users").hasAnyAuthority("ROLE_ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/user/**").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/user").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/user").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/user").hasAnyAuthority("ROLE_ADMIN");
 		
 		http.authorizeRequests().anyRequest().authenticated();
 
@@ -89,6 +98,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
+
 	
 }

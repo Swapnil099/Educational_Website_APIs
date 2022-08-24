@@ -38,25 +38,25 @@ public class libUserController {
 		}
 	}
 	
-	@PostMapping("/user/save")
+	@PostMapping("/user")
 	public ResponseEntity<LibUser> saveLibUser(@RequestBody LibUser newLibUser){
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toString());
 		return ResponseEntity.created(uri).body(libUserService.saveUser(newLibUser));
 	}
 	
-	@PostMapping("/role/save")
+	@PostMapping("/role")
 	public ResponseEntity<Role> saveRole(@RequestBody Role newRole){
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toString());
 		return ResponseEntity.created(uri).body(libUserService.saveRole(newRole));
 	}
 	
-	@PostMapping("/role/addtouser")
+	@PostMapping("/role/add-role-to-user")
 	public ResponseEntity<String> addRoleToUser(@RequestBody RoleToUserForm form){
 		libUserService.addRoleToLibUser(form.getUsername(), form.getRolename());
 		return ResponseEntity.ok().body("User Role Added");
 	}
 	
-	@DeleteMapping("/user/delete")
+	@DeleteMapping("/user")
 	public ResponseEntity<?> deleteUserByUsername(@RequestParam String username){
 		try {
 			libUserService.deleteUserByUsername(username);
@@ -66,7 +66,6 @@ public class libUserController {
 			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deletion Failed");
 		}
 	}
-	
 }
 
 class RoleToUserForm{
