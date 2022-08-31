@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,8 +15,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.entitiy.Comment;
+import com.example.demo.entitiy.Doubt;
 import com.example.demo.entitiy.LibUser;
 import com.example.demo.entitiy.Role;
+import com.example.demo.repository.CommentDao;
+import com.example.demo.repository.DoubtDao;
 import com.example.demo.repository.LibUserDao;
 import com.example.demo.repository.RoleDao;
 
@@ -27,7 +32,8 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 	private final LibUserDao libUserDao;
 	private final RoleDao roleDao;
 	private  final BCryptPasswordEncoder bCryptPasswordEncoder =  new BCryptPasswordEncoder();
-	
+	private final DoubtDao doubtDao;
+	private final CommentDao commentDao;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -79,5 +85,6 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 		libUserDao.delete(tempLibUser);
 
 	}
+
 
 }
