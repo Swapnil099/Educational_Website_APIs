@@ -1,21 +1,27 @@
 package com.example.demo.entitiy;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class LibUser {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,64 +33,14 @@ public class LibUser {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Role> roles = new ArrayList<>();
 	
-
-	public LibUser() {
-		super();
-	}
-
-	public LibUser(Long id, String name, String username, String password, Collection<Role> roles) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.username = username;
-		this.password = password;
-		this.roles = roles;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Collection<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
-	}
-
-	@Override
-	public String toString() {
-		return "LibUser [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + "]";
-	}
+	@OneToMany(mappedBy = "libUser", cascade = CascadeType.ALL)
+	private List<Comment> commentList;
 	
+	@OneToOne(mappedBy = "libUser", cascade = CascadeType.ALL)
+	private Student student;
 	
+	@OneToOne(mappedBy = "libUser", cascade = CascadeType.ALL)
+	private TeachingAssistant teachingAssistant;
+	
+
 }

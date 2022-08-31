@@ -6,5 +6,4 @@ import com.example.demo.entitiy.LibUser;
 
 public interface LibUserDao extends JpaRepository<LibUser, Long>{
 	LibUser findByUsername(String userName);
-
 }

@@ -58,7 +58,6 @@ public class CustomAuthorizationFiler extends OncePerRequestFilter {
 					SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 					filterChain.doFilter(request, response);
 				} catch (Exception e) {
-					e.printStackTrace();
 					response.setHeader("error", e.getMessage());
 
 					Map<String, String> error = new HashMap<>();
@@ -74,7 +73,6 @@ public class CustomAuthorizationFiler extends OncePerRequestFilter {
 				response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 				new ObjectMapper().writeValue(response.getOutputStream(), error);
 
-//				filterChain.doFilter(request, response);
 			}
 		}
 	}

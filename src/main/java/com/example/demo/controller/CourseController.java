@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,8 @@ import com.example.demo.service.CourseService;
 
 
 @RestController
-public class MyController {
+@RequestMapping("/api")
+public class CourseController {
 	
 	@Autowired
 	private CourseService courseService;
@@ -29,12 +31,12 @@ public class MyController {
 		return "home page";
 	}
 	
-	@GetMapping("/courses")
+	@GetMapping("/course")
 	public List<Course> getCourses(){
 		return courseService.getCourses();
 	}
 	
-	@GetMapping("/courses/{courseId}")
+	@GetMapping("/course/{courseId}")
 	public ResponseEntity<String> getCourseById(@PathVariable String courseId) {
 		try{
 			return courseService.getCourseByID(Long.parseLong(courseId));
@@ -44,7 +46,7 @@ public class MyController {
 		}
 	}
 	
-	@PostMapping("/courses")
+	@PostMapping("/course")
 	public ResponseEntity<String> addCourse(@RequestBody Course course) {
 		try{
 			return courseService.addCourse(course);

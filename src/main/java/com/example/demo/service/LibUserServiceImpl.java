@@ -28,11 +28,6 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 	private final RoleDao roleDao;
 	private  final BCryptPasswordEncoder bCryptPasswordEncoder =  new BCryptPasswordEncoder();
 	
-	public LibUserServiceImpl(LibUserDao libUserDao, RoleDao roleDao) {
-		super();
-		this.libUserDao = libUserDao;
-		this.roleDao = roleDao;
-	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -81,13 +76,8 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 	@Override
 	public void deleteUserByUsername(String username) throws UsernameNotFoundException {
 		LibUser tempLibUser = libUserDao.findByUsername(username);
-		try {
-			 libUserDao.delete(tempLibUser);
-		}
-		catch(UsernameNotFoundException e) {
-			e.printStackTrace();
-		}
-		return;
+		libUserDao.delete(tempLibUser);
+
 	}
 
 }

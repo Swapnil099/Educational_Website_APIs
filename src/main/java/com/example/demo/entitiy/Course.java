@@ -1,7 +1,14 @@
 package com.example.demo.entitiy;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,49 +22,19 @@ public class Course {
 	private long id;
 	private String title;
 	private String description;
+	private int price;
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="course_id")
+	private List<CourseReview> reviewList;
 	
-	public Course() {
-		super();
-	}
-
-	public Course(long id, String title, String description) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-	}
-
-	@Override
-	public String toString() {
-		return "Courses [id=" + id + ", title=" + title + ", description=" + description + "]";
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+	@JoinTable(
+			name="student_course",
+			joinColumns =@JoinColumn(name="course_id"),
+			inverseJoinColumns =@JoinColumn(name = "student_id"))
+	private List<Course> courseList;
 	
-	
-	
+		
 	
 }
