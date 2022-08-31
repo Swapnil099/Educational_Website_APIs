@@ -2,8 +2,10 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.example.demo.entitiy.Comment;
 import com.example.demo.entitiy.LibUser;
 import com.example.demo.entitiy.Role;
 
@@ -14,4 +16,5 @@ public interface LibUserService {
 	LibUser getUser(String username);
 	List<LibUser>getUsers();
 	void deleteUserByUsername(String username) throws UsernameNotFoundException;
+	
 }

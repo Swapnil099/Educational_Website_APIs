@@ -72,8 +72,9 @@ public class CustomAuthorizationFiler extends OncePerRequestFilter {
 
 				response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 				new ObjectMapper().writeValue(response.getOutputStream(), error);
-
 			}
+			
+//			filterChain.doFilter(request, response);
 		}
 	}
 

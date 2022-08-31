@@ -56,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 			LibUser user = libUserDao.findByUsername(username);
 			if(user == null) {
+				System.out.println("--------------1");
 				throw new UsernameNotFoundException("username not found: " + username);
 			}
 			
@@ -72,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		System.out.println("--------------2");
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 	}
 
@@ -94,7 +96,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.addFilterBefore(new CustomAuthorizationFiler(), UsernamePasswordAuthenticationFilter.class);
 	}
 	
-	@Bean
+	@Bean(name="AuthenticationManager")
+	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}

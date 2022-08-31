@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.http.MediaType;
 
@@ -36,12 +38,20 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 	}
 	
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws BadCredentialsException,UsernameNotFoundException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println("/n/n/n here");
+//		System.out.println("/n/n/n here");
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-		return authenticationManager.authenticate(authenticationToken);
+		Authentication authentication = null;
+		try {
+			authentication = authenticationManager.authenticate(authenticationToken);
+		}
+		catch(BadCredentialsException e) {
+//			e.printStackTrace();
+			throw new BadCredentialsException(e.getMessage());
+		}
+		return authentication;
 	}
 
 	@Override
@@ -63,7 +73,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 				.withIssuer(request.getRequestURL().toString())
 				.sign(algorithm);
 		
-		System.out.println(refreshToken);
+//		System.out.println(refreshToken);
 	
 		
 		Map<String,String> tokens = new HashMap<>();

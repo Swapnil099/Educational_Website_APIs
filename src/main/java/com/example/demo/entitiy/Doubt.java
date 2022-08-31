@@ -15,6 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.IntSequenceGenerator;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,16 +26,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 @Table(name = "doubt")
+@JsonIdentityInfo(generator=IntSequenceGenerator.class, property="json_id")	
 public class Doubt {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "course_id", nullable = false)
-	private Long courseId;
+	@ManyToOne  (cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+	@JoinColumn(name = "course_id", nullable = false)
+	@JsonIgnore
+	private Course course;
 	
 	@ManyToOne  (cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
 	@JoinColumn(name = "student_id",nullable = false)
+	@JsonIgnore
 	private Student student;
 	
 	@Column( nullable = false)
@@ -45,9 +53,11 @@ public class Doubt {
 	
 	@ManyToOne (cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
 	@JoinColumn(name="doubt_solver_id",nullable = true)
+	@JsonIgnore
 	private TeachingAssistant doubtSolvedByTA;
 	
 	@OneToMany(mappedBy = "doubt", cascade = CascadeType.ALL)
+	@JsonIgnore
 	List<Comment> comments = new ArrayList<>();
 	
 }

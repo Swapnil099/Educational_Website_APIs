@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.entitiy.Comment;
 import com.example.demo.entitiy.LibUser;
 import com.example.demo.entitiy.Role;
 import com.example.demo.service.LibUserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class libUserController {
 	private final LibUserService libUserService;
 	
@@ -28,7 +29,7 @@ public class libUserController {
 		this.libUserService = libUserService;
 	}
 	
-	@GetMapping("/user")
+	@GetMapping("")
 	public ResponseEntity<?> getusers(){
 		try {
 			return ResponseEntity.ok().body(libUserService.getUsers());
@@ -38,7 +39,7 @@ public class libUserController {
 		}
 	}
 	
-	@PostMapping("/user")
+	@PostMapping("")
 	public ResponseEntity<LibUser> saveLibUser(@RequestBody LibUser newLibUser){
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toString());
 		return ResponseEntity.created(uri).body(libUserService.saveUser(newLibUser));
@@ -56,7 +57,7 @@ public class libUserController {
 		return ResponseEntity.ok().body("User Role Added");
 	}
 	
-	@DeleteMapping("/user")
+	@DeleteMapping("")
 	public ResponseEntity<?> deleteUserByUsername(@RequestParam String username){
 		try {
 			libUserService.deleteUserByUsername(username);
@@ -66,6 +67,7 @@ public class libUserController {
 			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deletion Failed");
 		}
 	}
+	
 }
 
 class RoleToUserForm{
