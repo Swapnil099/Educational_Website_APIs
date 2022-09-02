@@ -1,0 +1,174 @@
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: rgb(255, 255, 255);
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.forms-wrapper{
+    display: flex;
+    width: 70%;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    height: auto;
+    margin-top: 5%;
+}
+
+.signup-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 35%;
+}
+
+.signup-heading{
+    width: 100%;
+    background-color: rgba(80, 79, 79, 1);
+    padding-left: 10px;
+}
+
+.signup-heading h3{
+    font-weight: lighter;
+    color: white;
+    padding: 10px;
+}
+
+.signup-form{
+    width: 100%;
+    width: 100%;
+    background-color: rgba(80, 79, 79, 0.68);
+    padding: 10px 0 10px 10px;  
+}
+
+.signup-form label{
+    color: white;
+    font-size: small;
+    padding-left: 10px;
+}
+
+.signup-form input{
+    color: rgba(80, 79, 79, 0.68);
+    margin-bottom: 2px;
+    border: 1px solid white;
+    border-radius: 3px;
+    width: 70%;
+    margin-left: 10px;
+    padding: 3px;
+}
+
+
+.signup-form button{
+    color: #727272e6;
+    background: white;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.5s ease;
+    font: smaller;
+    width: 25%;
+    height: Auto;
+    margin: 10px 0px 10px 10px;
+}
+
+.signup-form button a{
+    margin: 0px;
+    color: #727272e6;
+    font-size: medium;
+    height: 100%;
+}
+
+.signup-form button:hover{
+    background: rgba(80, 79, 79, 0);
+}
+
+.signup-form button:hover a{
+    color: white;
+}
+
+/* Log in Form */
+
+.login-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 35%;
+}
+
+.login-heading{
+    width: 100%;
+    background-color: rgba(80, 79, 79, 0.68);
+    padding-left: 10px;
+}
+
+.login-heading h3{
+    font-weight: lighter;
+    color: white;
+    padding: 10px;
+}
+
+.login-form{
+    width: 100%;
+    width: 100%;
+    background-color: rgba(80, 79, 79, 1);
+    padding: 10px 0 10px 10px;  
+}
+
+.login-form label{
+    color: white;
+    font-size: small;
+    padding-left: 10px;
+}
+
+.login-form input{
+    color: rgba(80, 79, 79, 0.68);
+    margin-bottom: 2px;
+    border: 1px solid white;
+    border-radius: 3px;
+    width: 70%;
+    margin-left: 10px;
+    padding: 3px;
+}
+
+
+.login-form button{
+    color: #727272e6;
+    background: white;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.5s ease;
+    font: smaller;
+    width: 25%;
+    height: Auto;
+    margin: 10px 0px 10px 10px;
+}
+
+.login-form button a{
+    margin: 0px;
+    color: #727272e6;
+    font-size: medium;
+    height: 100%;
+}
+
+.login-form button:hover{
+    background: rgba(80, 79, 79, 0.68);
+}
+
+.login-form button:hover a{
+    color: white;
+}
+

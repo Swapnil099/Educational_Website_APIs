@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--icon stylesheet link-->
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/brands.min.css}">
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css}"
+	integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css" href="/css/login-signup.css"
+	th:href="@{/css/login-signup.css}" />
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+</style>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+	<div class="container">
+		<div class="forms-wrapper">
+			<div class="signup-div">
+				<div class="signup-heading">
+					<h3>Create An Account</h3>
+					<div th:if="${param.success}">
+						<div>
+							<p>User Created Succesfully</p>
+						</div>
+					</div>
+				</div>
+				<div class="signup-form">
+					<form th:action="@{/user/register}" method="post"
+						th:object="${libUser}">
+						<label for="firstName">First Name</label>
+						<br>
+						<input type="text" id="firstName" name="firstName"
+							th:field="*{firstName}">
+						<br>
+						<label for="lastName">Last Name</label>
+						<br>
+						<input type="text" id="lastName" name="lastName"
+							th:field="*{lastName}">
+						<br>
+						<label for="email">Email</label>
+						<br>
+						<input type="email" id="email" name="email" th:field="*{email}">
+						<br>
+						<label for="Dob">DOB</label>
+						<br>
+						<input type="date" id="Dob" name="Dob" th:field="*{Dob}">
+						<br>
+						<label for="username">Username</label>
+						<br>
+						<input type="text" id="username" name="username"
+							th:field="*{username}">
+						<br>
+						<label for="password">Password</label>
+						<br>
+						<input type="password" id="password" name="password"
+							th:field="*{password}">
+						<br>
+
+						<button type="submit">
+							<a>Submit</a>
+						</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="login-div">
+				<div class="login-heading">
+					<h3>Log In</h3>
+				</div>
+				<div class="login-form">
+
+					<div th:if="${param.error}">
+						<div>
+							<h3>Invalid Username Password</h3>
+						</div>
+					</div>
+
+					<div th:if="${param.logout}">
+						<div>
+							<h3>Logout Succesfully</h3>
+						</div>
+					</div>
+
+					<form th:action="@{/user/login}" method="post">
+						<label for="username">Username</label>
+						<br>
+						<input type="text" id="username" name="username">
+						<br>
+						<label for="password">Password</label>
+						<br>
+						<input type="password" id="password" name="password">
+						<br>
+
+						<button type="submit">
+							<a>Log In</a>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

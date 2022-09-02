@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--icon stylesheet link-->  
+            <link rel="stylesheet" type="text/css" href="/css/login-signup.css"
+	th:href="@{/css/ADMIN/assignRole.css}" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/brands.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../dp.jpg" alt="dp">
+                <h3> John Doe </h3>
+                <p> Admin </p>
+            </div>
+
+            <!-- menu items -->
+
+            <ul>
+                <li><a href="#">
+                    <span class="icon"><i class="fa-solid fa-chart-line"></i></span>
+                    <span class="item">DashBoard</span>
+                </a></li>
+                <li><a href="#" class="selected-menu">
+                    <span class="icon"><i class="fa-solid fa-user-plus"></i></span>
+                    <span class="item">Assign Role</span>
+                </a></li>
+                <li><a href="#">
+                    <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <span class="item">Search</span>
+                </a></li>
+                <li><a href="#" >
+                    <span class="icon"><i class="fa-solid fa-people-arrows"></i></span>
+                    <span class="item">TA</span>
+                </a></li>
+                <li><a href="#">
+                    <span class="icon"><i class="fa-solid fa-book"></i></span>
+                    <span class="item">Course</span>
+                </a></li>
+                <li><a href="#">
+                    <span class="icon"><i class="fa-solid fa-graduation-cap"></i></span>
+                    <span class="item">Student</span>
+                </a></li>
+
+                <li><a th:href="@{/user/logout}">
+                    <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                    <span class="item">Log Out</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <div class="nav-bar">
+            <div class="btn">
+                <button> <a href=""> Assign Role </a></button>
+                <button> <a href=""> Search Unassigned User </a></button>
+            </div>
+        </div>
+
+        <div>
+
+        <div class="add-role-wrapper">
+                <div class="add-role-wrapper2">
+                    <!-- <div class="role-list">
+                        <h3>Valid Roles</h3>
+                        <p>ROLE_STUDENT</p>
+                        <p>ROLE_ADMIN</p>
+                        <p>ROLE_TA</p>
+                    </div> -->
+                    <div class="add-role">
+                        <form action="">
+                            <label for="username">Username</label><br>
+                            <input type="text" name="username" id="" placeholder="Enter Usrename"><br>
+
+                            <label for="">Select A Role</label><br>
+                            
+                            <input type="radio" id="admin" name="role" value="ROLE_ADMIN">
+                            <label for="admin">ROLE_ADMIN</label><br>
+        
+                            <input type="radio" id="student" name="role" value="ROLE_STUDENT">
+                            <label for="student">ROLE_STUDENT</label><br>
+                            
+                            <input type="radio" id="ta" name="role" value="ROLE_TA">
+                            <label for="ta">ROLE_TA</label><br>
+        
+                            <button><a href="">Confirm</a> </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
