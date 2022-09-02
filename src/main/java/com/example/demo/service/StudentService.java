@@ -14,13 +14,13 @@ import com.example.demo.entitiy.TeachingAssistant;
 public interface StudentService {
 	ResponseEntity<?> saveStudentByLibUserId(Student theStudent,Long libUserId);
 	
-	ResponseEntity<?> getStudentById(Long studentId);
+	Student getStudentById(Long studentId);
 	
-	ResponseEntity<?> getDoubtList(Long studentId);
-	ResponseEntity<?> getCourseList(Long studentId);
+	List<Doubt> getDoubtList(Long studentId);
+    List<Course> getCourseList(Long studentId);
 	ResponseEntity<?> getReviewList(Long studentId);
 	ResponseEntity<?> getCommentList(Long studentId);
-	ResponseEntity<?> getTeachingAssistantList(Long studentId);
+	List<TeachingAssistant> getTeachingAssistantList(Long studentId);
 	
 	ResponseEntity<?> assignCourse(Long courseId,Long studentId);
 	

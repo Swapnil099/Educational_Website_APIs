@@ -27,8 +27,9 @@ import com.example.demo.repository.RoleDao;
 import lombok.RequiredArgsConstructor;
 
 @Service @RequiredArgsConstructor @Transactional 
-public class LibUserServiceImpl implements LibUserService, UserDetailsService{
+public class LibUserServiceImpl implements LibUserService{
 	
+	private LibUser libUser;
 	private final LibUserDao libUserDao;
 	private final RoleDao roleDao;
 	private  final BCryptPasswordEncoder bCryptPasswordEncoder =  new BCryptPasswordEncoder();
@@ -39,7 +40,7 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		LibUser user = libUserDao.findByUsername(username);
 		if(user == null) {
-			throw new UsernameNotFoundException("username not found: " + username);
+			throw new UsernameNotFoundException("Invalid Username Password" + username);
 		}
 		
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -52,6 +53,7 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 
 	@Override
 	public LibUser saveUser(LibUser newLibUser) {
+		
 		newLibUser.setPassword(bCryptPasswordEncoder.encode(newLibUser.getPassword()));
 		return libUserDao.save(newLibUser);
 	}
@@ -85,6 +87,10 @@ public class LibUserServiceImpl implements LibUserService, UserDetailsService{
 		libUserDao.delete(tempLibUser);
 
 	}
+
+//	public boolean hasRole(String role) {
+//        return this.libUser.hasRole(role);
+//    }
 
 
 }

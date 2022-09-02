@@ -1,9 +1,13 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entitiy.Comment;
 import com.example.demo.entitiy.Course;
 import com.example.demo.entitiy.Doubt;
 import com.example.demo.entitiy.Student;
@@ -15,27 +19,26 @@ import com.example.demo.repository.TeachingAssistantDao;
 
 @Service
 public class DoubtServiceImpl implements DoubtService {
-	
+
 	@Autowired
 	private DoubtDao doubtDao;
-	
+
 	@Autowired
 	private StudentDao studentDao;
-	
+
 	@Autowired
 	private TeachingAssistantDao teachingAssistantDao;
-	
+
 	@Autowired
 	private CourseDao courseDao;
-	
+
 	@Override
 	public ResponseEntity<?> deleteDoubt(Long doubtId) {
 		try {
 			Doubt tempDoubt = doubtDao.getReferenceById(doubtId);
 			doubtDao.delete(tempDoubt);
 			return ResponseEntity.ok().body(tempDoubt);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Error Occured - " + e.getMessage());
 		}
 	}
@@ -48,12 +51,11 @@ public class DoubtServiceImpl implements DoubtService {
 			theDoubt.setResolvedStatus(false);
 			theDoubt.setUpvote(Long.parseLong("0"));
 			tempStudent.addDoubtToList(theDoubt);
-			
+
 			studentDao.save(tempStudent);
 			doubtDao.save(theDoubt);
 			return ResponseEntity.ok().body(theDoubt);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Error occured - " + e.getMessage());
 		}
 	}
@@ -63,16 +65,16 @@ public class DoubtServiceImpl implements DoubtService {
 		try {
 			Doubt tempDoubt = doubtDao.getReferenceById(doubtId);
 			TeachingAssistant tempTeachingAssistant = teachingAssistantDao.getReferenceById(teachingAssistantId);
-			
-			if(tempDoubt.getResolvedStatus() == true)  return ResponseEntity.ok().body("Doubt is Already Resolved");
-			
+
+			if (tempDoubt.getResolvedStatus() == true)
+				return ResponseEntity.ok().body("Doubt is Already Resolved");
+
 			tempDoubt.setResolvedStatus(true);
 			tempDoubt.setDoubtSolvedByTA(tempTeachingAssistant);
 			tempTeachingAssistant.addDoubtToResolvedList(tempDoubt);
 			doubtDao.save(tempDoubt);
 			return ResponseEntity.ok().body(tempDoubt);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Error occured - " + e.getMessage());
 		}
 	}
@@ -82,10 +84,32 @@ public class DoubtServiceImpl implements DoubtService {
 		try {
 			Course tempCourse = courseDao.getReferenceById(courseId);
 			return ResponseEntity.ok().body(tempCourse.getDoubtList());
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Error occured - " + e.getMessage());
 		}
 	}
 
+	@Override
+	public List<Comment> getCommentByDoubtId(Long doubtId) {
+		List<Comment> comments = new ArrayList<Comment>();
+
+		try {
+			Doubt doubt = doubtDao.getReferenceById(doubtId);
+			comments = doubt.getComments();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return comments;
+	}
+
+	@Override
+	public Doubt getDoubtById(Long doubtId) {
+		Doubt doubt = null;
+		try {
+			doubt = doubtDao.getReferenceById(doubtId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return doubt;
+	}
 }
