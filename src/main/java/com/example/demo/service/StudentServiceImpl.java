@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,38 +60,43 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public ResponseEntity<?> getStudentById(Long studentId) {
+	public Student getStudentById(Long studentId) {
+		Student tempStudent = null;
 		try {
-			Student tempStudent = studentDao.getReferenceById(studentId);
+			tempStudent = studentDao.getReferenceById(studentId);
 //			System.out.println(tempStudent.getLibUser().getName());
-			return ResponseEntity.ok().body(tempStudent);
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.badRequest().body("Error Occured - " + e.getMessage());
 		}
+		return tempStudent;
 	}
 
 	@Override
-	public ResponseEntity<?> getDoubtList(Long studentId) {
+	public List<Doubt> getDoubtList(Long studentId) {
+		List<Doubt> doubt = new ArrayList<Doubt>();
 		try {
 			Student tempStudent = studentDao.getReferenceById(studentId);
-			return ResponseEntity.ok().body(tempStudent.getDoubtList());
+			doubt = tempStudent.getDoubtList();
 		}
 		catch(Exception e) {
-			return ResponseEntity.badRequest().body("Error Occured - " + e.getMessage());
+			e.printStackTrace();
 		}
+		return doubt;
 	}
 
 	@Override
-	public ResponseEntity<?> getCourseList(Long studentId) {
+	public List<Course> getCourseList(Long studentId) {
+		List<Course> courses = new ArrayList<Course>();
 		try {
 			Student tempStudent = studentDao.getReferenceById(studentId);
-			return ResponseEntity.ok().body(tempStudent.getCourseList());
+			courses = tempStudent.getCourseList();
 		}
 		catch(Exception e) {
-			return ResponseEntity.badRequest().body("Error Occured - " + e.getMessage());
+			e.printStackTrace();
 		}
+		return courses;
 	}
 
 	@Override
@@ -114,14 +122,16 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public ResponseEntity<?> getTeachingAssistantList(Long studentId) {
+	public List<TeachingAssistant> getTeachingAssistantList(Long studentId) {
+		List<TeachingAssistant> teachingAssistantList = new ArrayList<>();
 		try {
 			Student tempStudent = studentDao.getReferenceById(studentId);
-			return ResponseEntity.ok().body(tempStudent.getLibUser().getTeachingAssistant());
+			teachingAssistantList = tempStudent.getTeachingAssistantList();
 		}
 		catch(Exception e) {
-			return ResponseEntity.badRequest().body("Error Occured - " + e.getMessage());
+			e.printStackTrace();
 		}
+		return teachingAssistantList;
 	}
 
 	@Override

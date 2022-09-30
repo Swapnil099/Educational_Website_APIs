@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,6 +44,8 @@ public class LibUser {
 	private String lastName;
 	@Column(name="email",nullable=false)
 	private String email;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date Dob;
 	private String username;
 	private String password;
@@ -57,6 +62,16 @@ public class LibUser {
 	
 	@OneToOne(mappedBy = "libUser", cascade = CascadeType.ALL)
 	private TeachingAssistant teachingAssistant;
-	
+
+//    public boolean hasRole(String roleName) {
+//        Iterator<Role> iterator = this.roles.iterator();
+//        while (iterator.hasNext()) {
+//            Role role = iterator.next();
+//            if (role.getName().equals(roleName)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 }

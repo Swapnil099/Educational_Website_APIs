@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--icon stylesheet link--> 
+        <link rel="stylesheet" type="text/css" href="/css/login-signup.css"
+	th:href="@{/css/STUDENT/doubtComment.css}" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/brands.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../../dp.jpg" alt="dp">
+                <h3> John Doe </h3>
+                <p> Student </p>
+            </div>
+
+            <!-- menu items -->
+
+            <ul>
+                <li><a th:href="@{'/student/profile?studentId=' + ${studentId}}">
+                    <span class="icon"><i class="fa-solid fa-address-card"></i></span>
+                    <span class="item"> My Profile</span>
+                </a></li>
+                <li><a th:href="@{'/student/course?studentId=' + ${studentId}}">
+                    <span class="icon"><i class="fa-solid fa-book"></i></span>
+                    <span class="item"> My Courses</span>
+                </a></li>
+                <li><a th:href="@{'/student/explore?studentId=' + ${studentId}}" >
+                    <span class="icon"><i class="fa-brands fa-wpexplorer"></i></span>
+                    <span class="item"> Explore</span>
+                </a></li>
+                <li><a th:href="@{'/student/doubt?studentId=' + ${studentId}}"   class="selected-menu">
+                    <span class="icon"><i class="fa-solid fa-circle-question"></i></span>
+                    <span class="item"> My Doubts</span>
+                </a></li>
+                <li><a th:href="@{'/student/ta?studentId=' + ${studentId}}">
+                    <span class="icon"><i class="fa-solid fa-person"></i></i></span>
+                    <span class="item">Teaching Assist.</span>
+                </a></li>
+                <li><a th:href="@{'/student/search?studentId=' + ${studentId}}">
+                    <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <span class="item">Search</span>
+                </a></li>
+                <li><a th:href="@{/user/logout}" >
+                    <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                    <span class="item">Log Out</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <div class="doubt-bar">
+            <div class="btn">
+                <button> <a href=""> Active Doubts </a></button>
+                <button> <a href=""> Resolved Doubts </a></button>
+            </div>
+        </div>
+
+        <div class="doubt-wrapper">
+            <div class="doubt">
+                <h3 th:text="${doubt.getCourse().getTitle()}" ></h3>
+                <p th:text="${doubt.getQuestion()}" ></p>
+            </div>
+            <div class="add-comment">
+                <textarea name="" id=""></textarea>
+                <button> <a href="#">Post comment </a> </button>
+            </div>
+        </div>
+
+
+        <div class="comment-wrapper">
+            <div class="comment" th:each="comment: ${comments}">
+                <h3 th:text="${comment.getLibUser().getUsername()}"></h3>
+                <p th:text="${comment.getContent()}"></p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

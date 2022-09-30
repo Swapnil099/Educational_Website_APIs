@@ -1,0 +1,187 @@
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: rgb(255, 255, 255);
+}
+
+.wrapper .sidebar{
+    background: #504F4F;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    padding: 20px 0;
+    transition: all 0.5s ease;
+}
+
+.wrapper .sidebar .profile{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.wrapper .profile img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.profile h3{
+    color: white;
+    margin: 10px 0 6px 0;
+}
+
+.profile p{
+    color: white;
+    font-size: 14px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid white;
+}
+
+ul li a{
+    display: block;
+    padding: 12px 30px;
+    color: white;
+    font-size: 16px;
+    position: relative;
+}
+
+.icon{
+    color: white;
+    width: 25px;
+    display: inline-block;
+}
+
+.sidebar a:hover, a.active{
+    color: #504F4F;
+    background: white;
+}
+
+.sidebar a:hover .icon{
+    color: #504F4F;
+}
+
+.selected-menu{
+    display: block;
+    padding: 12px 30px;
+    color: #504F4F;
+    background: white;
+    font-size: 16px;
+    position: relative;
+}
+
+.selected-menu .icon{
+    color: #504F4F;
+}
+
+.doubt-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 80%;
+    right: 0px;
+    padding: 20px 0;
+    background: white;
+    z-index: 1;
+}
+
+.btn{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn button{
+    color: white;
+    background: #727272e6;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.5s ease;
+    font: smaller;
+    width: 45%;
+    height: 40px;
+}
+
+.btn button a{
+    margin: 0px;
+    color: white;
+    font-size: medium;
+    height: 100%;
+}
+
+.btn button:hover{
+    background: white;
+}
+
+.btn button:hover a{
+    color: #727272e6;
+}
+
+.doubt-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    width: 80%;
+    position: absolute;
+    right: 0px;
+    margin-top: 100px;
+}
+
+.doubt{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 50%;
+    Height: Auto;
+    background: #504F4F;
+    margin: 10px 0;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.doubt h3{
+    font-weight: lighter;
+    margin-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+
+.doubt button{
+    color: #727272e6;
+    background: white;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.5s ease;
+    font: smaller;
+    width: 20%;
+    height: 25px;
+    margin: 8px 0 4px 0;
+}
+
+.doubt button a{
+    margin: 0px;
+    color: #504F4F;
+    font-size: medium;
+    height: 100%;
+}
+
+.doubt button:hover{
+    background: #504F4F;
+}
+
+.doubt button:hover a{
+    color: white;
+}
