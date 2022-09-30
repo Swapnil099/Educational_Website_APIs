@@ -1,4 +1,4 @@
-# spring_rest_api
+# Edu-Site - Educational Site with Different Features
 ### This is a sample project to practice & implement different Spring Technologies. 
 ![This is an image](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![This is an image](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white)
